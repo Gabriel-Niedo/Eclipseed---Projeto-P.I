@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Eclipseed</h1>
+    <br><br>
+    <h2>Forneça as informações da sua empresa.</h2>
+    <br><br><br>
+    <input type="text" id="input_nome" placeholder="Nome da Empresa">
+    <input type="text" id="input_email" placeholder="Email">
+    <input type="text" id="input_telefone" placeholder="Telefone">
+    <input type="text" id="input_cnpj" placeholder="CNPJ">
+    <br><br><br>
+    Informe quantos hectáres de plantio:
+    <input type="text" id="input_hec">
+    <br>
+    Informe o valor bruto faturado no plantio:
+    <input type="text" id="input_vBruto">
+    <br>
+    Informe o valor bruto gasto no plantio:
+    <input type="text" id="input_gasto">
+    <br>
+    Quantidade desejada de sensores (por hectar):
+    <input type="text" id="input_sensor">
+    <br>
+    Valor de venda por saca:
+    <input type="text" id="input_saca">
+    <br>
+    Quantidade de venda de saca:
+    <input type="text" id="input_qtdSaca">
+    <br><br>
+    <button onclick="calcular()">Calcular Financeiro</button>
+    <br><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    var sensor = Number(130);
+
+    function calcular() {
+        var hectares = Number(input_hec.value);
+        var faturado = Number(input_vBruto.value);
+        var gasto = Number(input_gasto.value);
+        var qtd = Number(input_sensor.value)
+        var instalação = sensor * qtd;
+        var faturamento = Number(faturado + (faturado * 0.30) - gasto);
+        var VendaSaca = Number(input_saca.value)
+        var qtdSaca = Number(input_qtdSaca.value)
+        var lucroSaca = VendaSaca * qtdSaca;
+
+        div_mensagem.innerHTML = `Nome da empresa: ${input_nome.value}<br>          Email: ${input_email.value}<br>         Telefone: ${input_telefone.value}<br>      CNPJ: ${input_cnpj.value} <br><br><br>
+        A fazenda da empresa conta com ${hectares} hectáres, um valor bruto faturado de <b style='color: green'>R$ ${faturado}</b> e <b style='color: green'>R$ ${gasto}</b> de gasto para replantio. <br><br>
+        Se a empresa desejar instalar ${qtd} sensores, sendo o valor do sensor <b style='color: green'>R$ ${sensor}</b>, o valor gasto com a instalação será de <b style='color: red'>R$ ${instalação}</b> por hectar, totalizando <b style='color: red'>R$ ${instalação * hectares}</b>.
+        <br><br>O lucro atual é de <b style='color: green'>${lucroSaca}</b>, mas com a utilização dos sensores na quantidade adequada (10 sensores por hectar) se tornaria aproximadamente <b style='color: green'> ${faturamento + lucroSaca}</b>, recuperando cerca de <b style='color: red'>3%</b> do prejuízo por hectar. <br>
+         `
+    }
+</script>
